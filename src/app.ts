@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
+import { pool } from "./databases/database";
 
 export class App {
   private app: Application;
@@ -18,6 +19,11 @@ export class App {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+  }
+
+  async db_connection() {
+    await pool.getConnection();
+    console.log("db connection established");
   }
 
   async listen() {
