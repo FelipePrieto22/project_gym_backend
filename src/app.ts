@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
-import { pool } from "./databases/database";
+import { sequelize } from "./databases/database";
 
 export class App {
   private app: Application;
@@ -22,8 +22,13 @@ export class App {
   }
 
   async db_connection() {
-    await pool.getConnection();
-    console.log("db connection established");
+    try {
+      // Sincronizar la base de datos con Sequelize
+      await sequelize.sync({ force: false }); // El parámetro force: true eliminará todas las tablas existentes y las volverá a crear
+      console.log("Sequelize models synchronized with the database");
+    } catch (error) {
+      console.error("Error establishing database connection:", error);
+    }
   }
 
   async listen() {
