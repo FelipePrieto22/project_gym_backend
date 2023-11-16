@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../databases/database";
 import { Schedule } from "./schedule.model";
+import { User } from "./user.model";
+import { Use } from "./use.model";
 
 export const Place = sequelize.define(
   "Place",
@@ -29,3 +31,5 @@ Schedule.belongsTo(Place, {
   foreignKey: "placeId",
   targetKey: "name",
 });
+
+Place.belongsToMany(User, { through: Use });

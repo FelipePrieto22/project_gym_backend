@@ -2,6 +2,8 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../databases/database";
 import { Schedule } from "./schedule.model";
 import { Have } from "./have.model";
+import { Place } from "./place.model";
+import { Use } from "./use.model";
 
 export const User = sequelize.define(
   "User",
@@ -30,3 +32,4 @@ export const User = sequelize.define(
 );
 
 User.belongsToMany(Schedule, { through: Have });
+User.belongsToMany(Place, { through: Use });

@@ -2,6 +2,8 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../databases/database";
 import { User } from "./user.model";
 import { Have } from "./have.model";
+import { Teacher } from "./teacher.model";
+import { Manages } from "./manages.model";
 
 export const Schedule = sequelize.define(
   "Schedule",
@@ -29,3 +31,4 @@ export const Schedule = sequelize.define(
 );
 
 Schedule.belongsToMany(User, { through: Have });
+Schedule.belongsToMany(Teacher, { through: Manages });
